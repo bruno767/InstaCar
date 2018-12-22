@@ -1,0 +1,72 @@
+[
+    {
+        "name": "Golf GTI",
+        "price": 30000,
+        "modelYear": "2017-06-19T18:43:19Z",
+        "brand": "Volkswagen",
+        "imageName": "golf",
+    },
+    {
+        "name": "Beetle",
+        "price": 15000,
+        "modelYear": "2016-02-19T18:43:19Z",
+        "brand": "Volkswagen",
+        "imageName": "beetle",
+    },
+    {
+        "name": "Bugatti Veyron",
+        "price": 400000,
+        "modelYear": "2016-10-19T18:43:19Z",
+        "brand": "Bugatti",
+        "imageName": "bugatti",
+    },
+    {
+        "name": "Up TSI",
+        "price": 10000,
+        "modelYear": "2017-01-19T18:43:19Z",
+        "brand": "Volkswagen",
+        "imageName": "up",
+    },
+    {
+        "name": "Lamborghini",
+        "price": 500000,
+        "modelYear": "2015-06-19T18:43:19Z",
+        "brand": "Lamborghini",
+        "imageName": "lamborghini",
+    },
+    {
+        "name": "Bentley",
+        "price": 200000,
+        "modelYear": "2015-06-19T18:43:19Z",
+        "brand": "Bentley",
+        "imageName": "bentley",
+    },
+    {
+        "name": "Audi RS7",
+        "price": 100000,
+        "modelYear": "2018-06-19T18:43:19Z",
+        "brand": "Audi",
+        "imageName": "audi",
+    },
+    {
+        "name": "Ateca",
+        "price": 40000,
+        "modelYear": "2018-10-19T18:43:19Z",
+        "brand": "Seat",
+        "imageName": "ateca",
+    },
+    {
+        "name": "Octavia",
+        "price": 30000,
+        "modelYear": "2018-01-19T18:43:19Z",
+        "brand": "Skoda",
+        "imageName": "superbestate",
+    },
+    {
+        "name": "Porsche Panamera",
+        "price": 100000,
+        "modelYear": "2016-06-19T18:43:19Z",
+        "brand": "Porsche",
+        "imageName": "porsche",
+    }
+]
