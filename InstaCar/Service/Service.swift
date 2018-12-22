@@ -7,3 +7,24 @@
 //
 
 import Foundation
+
+class Service: NSObject {
+    static let shared = Service()
+    //To be tested
+    func fetchCars (url: String, classRef: AnyClass) -> [CarViewModel] {
+        if let path =  Bundle(for: classRef).path(forResource: url, ofType: "json") {
+            do {
+                let jsonData = try Data(contentsOf: URL(fileURLWithPath: path), options: .alwaysMapped)
+                let decoder = JSONDecoder()
+                decoder.dateDecodingStrategy = .iso8601
+                let listOfCars = try decoder.decode([Car].self, from: jsonData)
+                return listOfCars.map({return CarViewModel(car: $0)})
+            } catch {
+                print("error: ", error)
+            }
+        }else{
+            print ("didint find the file")
+        }
+        return []
+    }
+}
