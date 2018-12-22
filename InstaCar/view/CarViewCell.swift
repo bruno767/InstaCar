@@ -9,7 +9,12 @@
 import UIKit
 import Cosmos
 
+protocol RatingDelegate : class {
+    func rate(_ value: Double, row: Int)
+}
+
 class CarViewCell: UITableViewCell {
+    weak var delegate: RatingDelegate?
     
     var carViewModel: CarViewModel!{
         didSet{
@@ -18,6 +23,7 @@ class CarViewCell: UITableViewCell {
             subtitleLabel.text = carViewModel.priceAndModel
             brandImageView.image = carViewModel.brandImage
             ratingView.text = carViewModel.rating.description
+            ratingView.rating = carViewModel.rating
         }
     }
     
@@ -60,12 +66,14 @@ class CarViewCell: UITableViewCell {
         rating.settings.textColor = UIColor.rgb(r: 7, g: 71, b: 89)
         
         rating.translatesAutoresizingMaskIntoConstraints = false
-        
         return rating
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
+        ratingView.didFinishTouchingCosmos = {rate in
+            self.delegate?.rate(rate ,row: self.ratingView.tag)
+        }
         setupViews()
     }
     

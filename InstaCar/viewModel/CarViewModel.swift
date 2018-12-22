@@ -12,7 +12,9 @@ import Foundation
 struct CarViewModel {
     
     private let car: Car
-    let rating: Float
+    var rating: Double
+    
+    var ball = 0
     
     public init(car: Car) {
         self.car = car

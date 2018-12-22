@@ -8,7 +8,6 @@
 import UIKit
 import Foundation
 
-
 class CarViewController: UITableViewController {
     
     var listOfCarViewModels = [CarViewModel]()
@@ -40,6 +39,8 @@ class CarViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! CarViewCell
         cell.carViewModel = listOfCarViewModels[indexPath.row]
+        cell.ratingView.tag = indexPath.row
+        cell.delegate = self
         return cell
     }
     
@@ -64,6 +65,15 @@ class CarViewController: UITableViewController {
     }
     
 }
+
+extension CarViewController: RatingDelegate {
+    func rate(_ value: Double, row: Int) {
+        self.listOfCarViewModels[row].rating = value
+        let indexPath = IndexPath(item: row, section: 0)
+        tableView.reloadRows(at: [indexPath], with: .fade)
+    }
+}
+
 
 class CustomNavigationController: UINavigationController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
