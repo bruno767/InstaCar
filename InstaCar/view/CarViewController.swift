@@ -46,6 +46,7 @@ class CarViewController: UITableViewController {
     fileprivate func setupTableView() {
         tableView.register(CarViewCell.self, forCellReuseIdentifier: cellId)
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 24, bottom: 0, right: 24)
+        tableView.allowsSelection = false
         tableView.separatorColor = .mainTextBlue
         tableView.backgroundColor = UIColor.rgb(r: 38, g: 38, b: 38)
         tableView.rowHeight = UITableView.automaticDimension
