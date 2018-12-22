@@ -15,6 +15,8 @@
 		3935BB2621CE867500301E26 /* Car.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3935BB2521CE867500301E26 /* Car.swift */; };
 		3935BB2821CE86B000301E26 /* CarTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3935BB2721CE86B000301E26 /* CarTests.swift */; };
 		3935BB2A21CE86EF00301E26 /* jsonTest.json in Resources */ = {isa = PBXBuildFile; fileRef = 3935BB2921CE86EF00301E26 /* jsonTest.json */; };
+		3935BB2C21CE88B600301E26 /* CarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3935BB2B21CE88B600301E26 /* CarViewModel.swift */; };
+		3935BB2E21CE893200301E26 /* CarViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3935BB2D21CE893200301E26 /* CarViewModelTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +42,8 @@
 		3935BB2521CE867500301E26 /* Car.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Car.swift; sourceTree = "<group>"; };
 		3935BB2721CE86B000301E26 /* CarTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarTests.swift; sourceTree = "<group>"; };
 		3935BB2921CE86EF00301E26 /* jsonTest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = jsonTest.json; sourceTree = "<group>"; };
+		3935BB2B21CE88B600301E26 /* CarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarViewModel.swift; sourceTree = "<group>"; };
+		3935BB2D21CE893200301E26 /* CarViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarViewModelTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +105,7 @@
 				3935BB2921CE86EF00301E26 /* jsonTest.json */,
 				3935BB1821CE85D600301E26 /* Info.plist */,
 				3935BB2721CE86B000301E26 /* CarTests.swift */,
+				3935BB2D21CE893200301E26 /* CarViewModelTests.swift */,
 			);
 			path = InstaCarTests;
 			sourceTree = "<group>";
@@ -116,6 +121,7 @@
 		3935BB2221CE864800301E26 /* viewModel */ = {
 			isa = PBXGroup;
 			children = (
+				3935BB2B21CE88B600301E26 /* CarViewModel.swift */,
 			);
 			path = viewModel;
 			sourceTree = "<group>";
@@ -239,6 +245,7 @@
 				3935BB0421CE85D500301E26 /* ViewController.swift in Sources */,
 				3935BB0221CE85D500301E26 /* AppDelegate.swift in Sources */,
 				3935BB2621CE867500301E26 /* Car.swift in Sources */,
+				3935BB2C21CE88B600301E26 /* CarViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -247,6 +254,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3935BB2821CE86B000301E26 /* CarTests.swift in Sources */,
+				3935BB2E21CE893200301E26 /* CarViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

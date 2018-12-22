@@ -15,6 +15,8 @@ class CarTests: XCTestCase {
     var carDecoded: Car!
     
     var dateFormatter: DateFormatter!
+    
+    //DateFormat comming from the "Backend"
     let modelYear = "2017-06-19T18:43:19Z"
     let modelYearDecodedCar = "2010-06-19T18:43:19Z"
     
@@ -23,10 +25,10 @@ class CarTests: XCTestCase {
         dateFormatter.locale = Locale(identifier: "en_US_POSIX")
         dateFormatter.timeZone = TimeZone.autoupdatingCurrent
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        
         let modelYearDate = dateFormatter.date(from: self.modelYear) ?? Date()
         
         self.car = Car(name: "Beetle", price: 10000, modelYear: modelYearDate , brand: "Volkswagen", imageName: "someBrand")
-        
         
         if let path = Bundle(for: CarTests.self).path(forResource: "jsonTest", ofType: "json") {
             do {
