@@ -22,8 +22,8 @@ class CarViewCell: UITableViewCell {
             titleLabel.text = carViewModel.name
             subtitleLabel.text = carViewModel.priceAndModel
             brandImageView.image = carViewModel.brandImage
-            ratingView.text = carViewModel.rating.description
-            ratingView.rating = carViewModel.rating
+            ratingView.text = String(format: "%.1f", carViewModel.currentRate)
+            ratingView.rating = carViewModel.currentRate
         }
     }
     
@@ -63,6 +63,7 @@ class CarViewCell: UITableViewCell {
         let rating = CosmosView()
         rating.text = "0.0"
         rating.settings.textMargin = 8
+        rating.settings.fillMode = .precise
         rating.settings.textColor = UIColor.rgb(r: 7, g: 71, b: 89)
         
         rating.translatesAutoresizingMaskIntoConstraints = false

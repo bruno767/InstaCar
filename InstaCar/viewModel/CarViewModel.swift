@@ -9,20 +9,26 @@
 import UIKit
 import Foundation
 
-struct CarViewModel {
+class CarViewModel {
     
-    private let car: Car
-    var rating: Double
+    private var car: Car
     
     var ball = 0
     
     public init(car: Car) {
         self.car = car
-        self.rating = 0.0
     }
     
     public var name: String {
         return car.name
+    }
+    
+    func rating(value: Double) {
+        car.rate = (car.rate + value) / 2
+    }
+    
+    public var currentRate: Double {
+        return car.rate
     }
     
     public var modelYear: String {

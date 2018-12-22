@@ -5,6 +5,7 @@
         "price": 500,
         "modelYear": "2010-06-19T18:43:19Z",
         "brand": "default",
-        "imageName": "default"
+        "imageName": "default",
+        "rate": 3.0
     }
 ]

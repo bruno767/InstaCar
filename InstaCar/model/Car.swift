@@ -14,5 +14,6 @@ struct Car: Decodable {
     let modelYear: Date
     let brand: String
     let imageName: String
+    var rate: Double
 }
 

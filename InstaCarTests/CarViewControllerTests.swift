@@ -22,7 +22,6 @@ class CarViewControllerTests: XCTestCase {
         window = UIWindow()
         carViewController = CarViewController(style: .plain)
         UIApplication.shared.keyWindow!.rootViewController = carViewController
-        loadView()
     }
     
     override func tearDown() {
@@ -30,14 +29,10 @@ class CarViewControllerTests: XCTestCase {
         super.tearDown()
     }
     
-    func loadView()
-    {
-        window.rootViewController = carViewController
-        RunLoop.current.run(until: Date())
-    }
     
     func testShouldFetchCarViewModels()
     {
+        carViewController.loadViewIfNeeded()
         XCTAssertNotNil(carViewController.view, "CarViewController should have been loaded")
         carViewController.fetchData()
         XCTAssertNotNil(carViewController.listOfCarViewModels, "Should fetch bus numbers when the view is loaded")
@@ -52,6 +47,17 @@ class CarViewControllerTests: XCTestCase {
     func testListOfCars() {
         carViewController.loadViewIfNeeded()
         XCTAssertEqual(carViewController.listOfCarViewModels.count, 10)
+        
+    }
+    
+    func testrandomTimer() {
+        carViewController.loadViewIfNeeded()
+        
+        XCTAssertNil(carViewController.randomTimer)
+        carViewController.radomRating()
+        XCTAssertNotNil(carViewController.randomTimer)
+        carViewController.radomRating()
+        XCTAssertNil(carViewController.randomTimer)
         
     }
 }

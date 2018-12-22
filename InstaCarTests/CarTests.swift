@@ -28,7 +28,7 @@ class CarTests: XCTestCase {
         
         let modelYearDate = dateFormatter.date(from: self.modelYear) ?? Date()
         
-        self.car = Car(name: "Beetle", price: 10000, modelYear: modelYearDate , brand: "Volkswagen", imageName: "someBrand")
+        self.car = Car(name: "Beetle", price: 10000, modelYear: modelYearDate , brand: "Volkswagen", imageName: "someBrand", rate: 3.0)
         
         if let path = Bundle(for: CarTests.self).path(forResource: "jsonTest", ofType: "json") {
             do {
