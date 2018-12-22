@@ -1,0 +1,6 @@
+framework module Pods_InstaCarTests {
+  umbrella header "Pods-InstaCarTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,6 @@
+framework module Pods_InstaCar {
+  umbrella header "Pods-InstaCar-umbrella.h"
+
+  export *
+  module * { export * }
+}
