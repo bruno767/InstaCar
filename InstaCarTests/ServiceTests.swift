@@ -25,7 +25,7 @@ class ServiceTests: XCTestCase {
         XCTAssertNotNil(carViewModel.carImage)
         XCTAssertEqual(carViewModel.modelYear, "Jun/2010")
         XCTAssertEqual(carViewModel.priceAndModel, "F. Registration: Jun/2010 Price: 500,00 €")
-        XCTAssertEqual(carViewModel.currentRate, 0.0)
+        XCTAssertEqual(carViewModel.currentRate, 3.0)
     }
 
 }
