@@ -1,7 +1,6 @@
 # InstaCar
-> This project is a simple feed of cars and theirs repective model your and price. 
-There is also a possibility to rate each car.
-Another feature is a button to rate a random car with a random value.
+> This project is a simple feed of cars and theirs repective model and price. 
+There also a possibility to rate each car and a button to rate a random car with a random value.
 
 ## Features
 
