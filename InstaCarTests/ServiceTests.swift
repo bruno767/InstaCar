@@ -18,7 +18,7 @@ class ServiceTests: XCTestCase {
     }
 
     func testService() {
-        let carViewModel = Service.shared.fetchCars(url: "jsonTest", classRef: ServiceTests.self)[0]
+        let carViewModel = Service.shared.fetchCars(url: "jsonTest", classRef: ServiceTests.self)[1]
         
         XCTAssertEqual(carViewModel.name, "testCar")
         XCTAssertNotNil(carViewModel.brandImage)
@@ -28,4 +28,10 @@ class ServiceTests: XCTestCase {
         XCTAssertEqual(carViewModel.currentRate, 3.0)
     }
 
+    func testListOrder() {
+        let carViewModels = Service.shared.fetchCars(url: "jsonTest", classRef: ServiceTests.self)
+        
+        XCTAssertGreaterThan(carViewModels[0].currentRate, carViewModels[1].currentRate)
+        
+    }
 }

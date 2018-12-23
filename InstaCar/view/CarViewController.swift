@@ -111,8 +111,9 @@ extension CarViewController: RatingDelegate {
         
         showToast(message: "Rating the " + car.name + " with " + String(format: "%.1f", value) + " stars.")
         
-        let indexPath = IndexPath(item: row, section: 0)
-        tableView.reloadRows(at: [indexPath], with: .fade)
+        listOfCarViewModels = listOfCarViewModels.sorted(by: { $0.currentRate > $1.currentRate })
+        
+        tableView.reloadData()
     }
 }
 

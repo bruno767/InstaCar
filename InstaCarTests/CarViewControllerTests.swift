@@ -52,9 +52,11 @@ class CarViewControllerTests: XCTestCase {
 
     func testRating() {
         carViewController.loadViewIfNeeded()
-        XCTAssertEqual(carViewController.listOfCarViewModels[0].currentRate, 3.5)
-        carViewController.rate(5, row: 0)
-        XCTAssertEqual(carViewController.listOfCarViewModels[0].currentRate, (3.5 + 5)/2)
+        let carViewModel = carViewController.listOfCarViewModels[0]
+        XCTAssertEqual(carViewModel.currentRate, 4.8)
+        carViewController.rate(2, row: 0)
+        let sameCarViewModel = carViewController.listOfCarViewModels.first(where: {$0.name == carViewModel.name})
+        XCTAssertEqual(sameCarViewModel?.currentRate, (4.8 + 2) / 2)
     }
 
     func testrandomTimer() {
