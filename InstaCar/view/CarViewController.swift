@@ -11,6 +11,10 @@ import Foundation
 class CarViewController: UITableViewController {
     
     weak var randomTimer: Timer?
+    var alert: UIAlertController!
+    var tap: UITapGestureRecognizer!
+    var task: DispatchWorkItem?
+    
     var listOfCarViewModels = [CarViewModel]()
     let cellId = "carCell"
     
@@ -73,8 +77,8 @@ class CarViewController: UITableViewController {
         navigationController?.navigationBar.barTintColor = UIColor.rgb(r: 30, g: 45, b: 134)
         navigationController?.navigationBar.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
     }
-    
 }
+
 //MARK: Random timer
 
 extension CarViewController {
@@ -87,7 +91,7 @@ extension CarViewController {
             randomTimer = nil
         }
     }
-
+    
     @objc
     func runTimedCode(){
         let count = self.listOfCarViewModels.count - 1
@@ -104,16 +108,15 @@ extension CarViewController: RatingDelegate {
         
         let car  = self.listOfCarViewModels[row]
         car.rating(value: value)
-
+        
         showToast(message: "Rating the " + car.name + " with " + String(format: "%.1f", value) + " stars.")
-       
+        
         let indexPath = IndexPath(item: row, section: 0)
         tableView.reloadRows(at: [indexPath], with: .fade)
     }
 }
 
 //MARK: Setting up Nav Controller
-
 class CustomNavigationController: UINavigationController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         self.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
@@ -130,22 +133,28 @@ extension UIColor {
 }
 
 //MARK: Setting up Toast
-extension UITableViewController {
+extension CarViewController {
     func showToast(message : String) {
-        let alert = UIAlertController(title: "", message: message, preferredStyle: .alert)
-        
+        alert = UIAlertController(title: "", message: message, preferredStyle: .alert)
+       
+        self.tap = UITapGestureRecognizer(target: self, action: #selector(self.dismissAlert))
+
         if let presented = self.presentedViewController {
             presented.removeFromParent()
         }
         
         if presentedViewController == nil {
-            self.present(alert, animated: true, completion: nil)
-        }
-        
-        let when = DispatchTime.now() + 2.5
-            DispatchQueue.main.asyncAfter(deadline: when){
-                alert.dismiss(animated: true, completion: nil)
-        }
-        
+            self.present(alert, animated: true, completion:{
+                self.alert.view.superview?.isUserInteractionEnabled = true
+                self.alert.view.superview?.addGestureRecognizer(self.tap)
+            })
+        }        
+        perform(#selector(dismissAlert), with: nil, afterDelay: 2.5)
+
+    }
+
+    @objc func dismissAlert() {
+        self.alert.dismiss(animated: true, completion: nil)
+        NSObject.cancelPreviousPerformRequests(withTarget: self)
     }
 }
