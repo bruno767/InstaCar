@@ -18,7 +18,8 @@ class Service: NSObject {
                 let decoder = JSONDecoder()
                 decoder.dateDecodingStrategy = .iso8601
                 let listOfCars = try decoder.decode([Car].self, from: jsonData)
-                return listOfCars.map({return CarViewModel(car: $0)})
+                let sortedList = listOfCars.sorted(by: { $0.rate > $1.rate })
+                return sortedList.map({return CarViewModel(car: $0)})
             } catch {
                 print("error: ", error)
             }
