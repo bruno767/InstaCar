@@ -49,7 +49,14 @@ class CarViewControllerTests: XCTestCase {
         XCTAssertEqual(carViewController.listOfCarViewModels.count, 10)
         
     }
-    
+
+    func testRating() {
+        carViewController.loadViewIfNeeded()
+        XCTAssertEqual(carViewController.listOfCarViewModels[0].currentRate, 3.5)
+        carViewController.rate(5, row: 0)
+        XCTAssertEqual(carViewController.listOfCarViewModels[0].currentRate, (3.5 + 5)/2)
+    }
+
     func testrandomTimer() {
         carViewController.loadViewIfNeeded()
         
@@ -58,6 +65,18 @@ class CarViewControllerTests: XCTestCase {
         XCTAssertNotNil(carViewController.randomTimer)
         carViewController.radomRating()
         XCTAssertNil(carViewController.randomTimer)
+        
+    }
+    func testToast() {
+        carViewController.loadViewIfNeeded()
+        
+        carViewController.showToast(message: "test")
+        XCTAssertNotNil(carViewController.presentedViewController)
+        
+        let when = DispatchTime.now() + 2.5
+        DispatchQueue.main.asyncAfter(deadline: when){
+              XCTAssertNil(self.carViewController.presentedViewController)
+        }
         
     }
 }

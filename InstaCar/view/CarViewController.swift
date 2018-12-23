@@ -106,6 +106,7 @@ extension CarViewController: RatingDelegate {
         car.rating(value: value)
 
         showToast(message: "Rating the " + car.name + " with " + String(format: "%.1f", value) + " stars.")
+       
         let indexPath = IndexPath(item: row, section: 0)
         tableView.reloadRows(at: [indexPath], with: .fade)
     }
@@ -129,22 +130,22 @@ extension UIColor {
 }
 
 //MARK: Setting up Toast
-extension UIViewController {
+extension UITableViewController {
     func showToast(message : String) {
-        let toastLabel = UILabel(frame: CGRect(x: (self.view.frame.size.width/2) - (self.view.frame.width - 10)/2, y: self.view.frame.size.height-100, width: self.view.frame.width - 10 , height: 55))
-        toastLabel.backgroundColor = UIColor.black.withAlphaComponent(0.6)
-        toastLabel.textColor = UIColor.white
-        toastLabel.textAlignment = .center;
-        toastLabel.font = UIFont(name: "Montserrat-Light", size: 14.0)
-        toastLabel.text = message
-        toastLabel.numberOfLines = -1
-        toastLabel.alpha = 1.0
-        toastLabel.layer.cornerRadius = 10;
-        toastLabel.clipsToBounds  =  true
-        self.view.addSubview(toastLabel)
-        UIView.animate(withDuration: 4.0, delay: 0.1, options: .curveEaseIn, animations: {
-            toastLabel.alpha = 0.0
-        }, completion: {(isCompleted) in
-            toastLabel.removeFromSuperview()
-        })
-    } }
+        let alert = UIAlertController(title: "", message: message, preferredStyle: .alert)
+        
+        if let presented = self.presentedViewController {
+            presented.removeFromParent()
+        }
+        
+        if presentedViewController == nil {
+            self.present(alert, animated: true, completion: nil)
+        }
+        
+        let when = DispatchTime.now() + 2.5
+            DispatchQueue.main.asyncAfter(deadline: when){
+                alert.dismiss(animated: true, completion: nil)
+        }
+        
+    }
+}
