@@ -29,10 +29,10 @@ class CarViewModelTests: XCTestCase {
             return XCTFail("Could not format the year")
         }
         
-        self.car = Car(name: "Beetle", price: 10000, modelYear: modelYearDate , brand: "default", imageName: "default")
+        self.car = Car(name: "Beetle", price: 10000, modelYear: modelYearDate , brand: "default", imageName: "default",rate: 0.0)
         self.carViewModel = CarViewModel(car: car)
         
-        self.carDefaultValue = Car(name: "SomeName", price: 1, modelYear: Date(), brand: "someBrand", imageName: "someImage")
+        self.carDefaultValue = Car(name: "SomeName", price: 1, modelYear: Date(), brand: "someBrand", imageName: "someImage",rate: 0.0)
         
         self.carViewModelDefaultValue = CarViewModel(car: carDefaultValue)
     }
@@ -48,7 +48,7 @@ class CarViewModelTests: XCTestCase {
         XCTAssertNotNil(carViewModel.carImage)
         XCTAssertEqual(carViewModel.modelYear, "Jun/2017")
         XCTAssertEqual(carViewModel.priceAndModel, "F. Registration: Jun/2017 Price: 10.000,00 €")
-        XCTAssertEqual(carViewModel.rating, 0.0)
+        XCTAssertEqual(carViewModel.currentRate, 0.0)
     }
     
     func testCarViewModelNil() {
@@ -62,7 +62,7 @@ class CarViewModelTests: XCTestCase {
         XCTAssertEqual(carViewModelDefaultValue.modelYear, newDate)
         
         XCTAssertEqual(carViewModelDefaultValue.priceAndModel, "F. Registration: Dec/2018 Price: 1,00 €")
-        XCTAssertEqual(carViewModelDefaultValue.rating, 0.0)
+        XCTAssertEqual(carViewModelDefaultValue.currentRate, 0.0)
     }
     
 }

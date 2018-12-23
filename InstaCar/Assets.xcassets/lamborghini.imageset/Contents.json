@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "lamborghini.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "lamborghini.png",
       "scale" : "2x"
     },
     {

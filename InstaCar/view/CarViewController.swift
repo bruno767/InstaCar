@@ -10,6 +10,11 @@ import Foundation
 
 class CarViewController: UITableViewController {
     
+    weak var randomTimer: Timer?
+    var alert: UIAlertController!
+    var tap: UITapGestureRecognizer!
+    var task: DispatchWorkItem?
+    
     var listOfCarViewModels = [CarViewModel]()
     let cellId = "carCell"
     
@@ -18,6 +23,7 @@ class CarViewController: UITableViewController {
         setupNavBar()
         setupTableView()
         fetchData()
+        randomTimer = nil
     }
     
     func fetchData() {
@@ -57,24 +63,60 @@ class CarViewController: UITableViewController {
     
     fileprivate func setupNavBar() {
         navigationItem.title = "InstaCar"
+        
+        let randomButton = UIButton(type: .system)
+        let img = #imageLiteral(resourceName: "dice").withRenderingMode(.alwaysOriginal)
+        randomButton.setImage(img, for: .normal)
+        randomButton.imageView?.contentMode = .scaleAspectFit
+        randomButton.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        randomButton.addTarget(self, action: #selector(radomRating), for: .touchDown)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: randomButton)
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.backgroundColor = .yellow
         navigationController?.navigationBar.isTranslucent = false
         navigationController?.navigationBar.barTintColor = UIColor.rgb(r: 30, g: 45, b: 134)
         navigationController?.navigationBar.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
     }
-    
 }
+
+//MARK: Random timer
+
+extension CarViewController {
+    @objc
+    func radomRating() {
+        if randomTimer == nil {
+            randomTimer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(runTimedCode), userInfo: nil, repeats: true)
+        } else {
+            randomTimer?.invalidate()
+            randomTimer = nil
+        }
+    }
+    
+    @objc
+    func runTimedCode(){
+        let count = self.listOfCarViewModels.count - 1
+        let row = Int.random(in: 0 ... count)
+        let rateValue = Double.random(in: 1 ... 5)
+        self.rate(rateValue, row: row)
+    }
+}
+
+//MARK: Delegate
 
 extension CarViewController: RatingDelegate {
     func rate(_ value: Double, row: Int) {
-        self.listOfCarViewModels[row].rating = value
+        
+        let car  = self.listOfCarViewModels[row]
+        car.rating(value: value)
+        
+        showToast(message: "Rating the " + car.name + " with " + String(format: "%.1f", value) + " stars.")
+        
         let indexPath = IndexPath(item: row, section: 0)
         tableView.reloadRows(at: [indexPath], with: .fade)
     }
 }
 
-
+//MARK: Setting up Nav Controller
 class CustomNavigationController: UINavigationController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         self.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
@@ -85,8 +127,34 @@ class CustomNavigationController: UINavigationController {
 extension UIColor {
     static let mainTextBlue = UIColor.rgb(r: 7, g: 71, b: 89)
     static let highlightColor = UIColor.rgb(r: 50, g: 199, b: 242)
-    
     static func rgb(r: CGFloat, g: CGFloat, b: CGFloat) -> UIColor {
         return UIColor(red: r/255, green: g/255, blue: b/255, alpha: 1)
+    }
+}
+
+//MARK: Setting up Toast
+extension CarViewController {
+    func showToast(message : String) {
+        alert = UIAlertController(title: "", message: message, preferredStyle: .alert)
+       
+        self.tap = UITapGestureRecognizer(target: self, action: #selector(self.dismissAlert))
+
+        if let presented = self.presentedViewController {
+            presented.removeFromParent()
+        }
+        
+        if presentedViewController == nil {
+            self.present(alert, animated: true, completion:{
+                self.alert.view.superview?.isUserInteractionEnabled = true
+                self.alert.view.superview?.addGestureRecognizer(self.tap)
+            })
+        }        
+        perform(#selector(dismissAlert), with: nil, afterDelay: 2.5)
+
+    }
+
+    @objc func dismissAlert() {
+        self.alert.dismiss(animated: true, completion: nil)
+        NSObject.cancelPreviousPerformRequests(withTarget: self)
     }
 }
