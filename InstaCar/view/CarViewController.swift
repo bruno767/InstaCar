@@ -85,8 +85,10 @@ extension CarViewController {
     @objc
     func radomRating() {
         if randomTimer == nil {
+            showToast(message: "Started rating randomly each 5 seconds..")
             randomTimer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(runTimedCode), userInfo: nil, repeats: true)
         } else {
+            showToast(message: "Stopped rating randomly.")
             randomTimer?.invalidate()
             randomTimer = nil
         }
